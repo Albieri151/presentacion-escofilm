@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escofilm - Propuesta de Diseño</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #050505; color: #e4e4e7; overflow: hidden; }
-        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 3rem 5rem; box-sizing: border-box; animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-        .slide.active { display: flex; flex-direction: column; justify-content: center; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); scale: 0.98; } to { opacity: 1; transform: translateY(0); scale: 1; } }
-        .accent-text { color: #fbbf24; } /* Amber 400 */
-        .serif { font-family: 'Playfair Display', serif; }
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); }
         
+        /* Slide Transitions */
+        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 3rem 5rem; box-sizing: border-box; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .slide.active { display: flex; flex-direction: column; justify-content: center; opacity: 1; animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); scale: 0.98; } to { opacity: 1; transform: translateY(0); scale: 1; } }
+        
+        /* Custom Classes */
+        .accent-text { color: #fbbf24; } 
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.3s; }
+        .glass-panel:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(251, 191, 36, 0.3); }
+        .code-font { font-family: 'Courier New', monospace; letter-spacing: -0.5px; }
+
         /* Navigation Controls */
         .controls { position: absolute; bottom: 2.5rem; right: 4rem; display: flex; gap: 1rem; z-index: 50; }
         .btn-nav { background: transparent; border: 1px solid #3f3f46; color: white; width: 3rem; height: 3rem; border-radius: 50%; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-        .btn-nav:hover { background: #fbbf24; color: black; border-color: #fbbf24; scale: 1.1; }
+        .btn-nav:hover { background: #fbbf24; color: black; border-color: #fbbf24; transform: scale(1.1); }
         .progress-bar { position: absolute; bottom: 0; left: 0; height: 4px; background: #fbbf24; transition: width 0.5s ease; }
     </style>
 </head>
@@ -27,21 +33,33 @@
     <!-- BACKGROUND ELEMENTS -->
     <div class="fixed top-0 left-0 w-full h-full z-[-1] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black"></div>
     <div class="fixed -bottom-32 -left-32 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl"></div>
+    <div class="fixed top-[-100px] right-[-100px] w-64 h-64 bg-purple-900/10 rounded-full blur-3xl"></div>
 
-    <!-- SLIDE 1: PORTADA -->
+    <!-- SLIDE 1: PORTADA & CRÉDITOS -->
     <div class="slide active" id="slide-1">
         <div class="max-w-5xl">
             <h1 class="text-7xl md:text-9xl font-black leading-none tracking-tight mb-6">
-                ESCO<span class="font-light">FILM</span><span class="text-amber-400">.</span>
+                ESCO<span class="font-light text-zinc-400">FILM</span><span class="text-amber-400">.</span>
             </h1>
             <div class="h-px w-32 bg-gradient-to-r from-amber-400 to-transparent mb-8"></div>
             <h2 class="text-3xl font-light text-zinc-300 max-w-2xl leading-normal">
                 Elevando la narrativa visual para el <span class="serif italic text-amber-400">sector corporativo</span>.
             </h2>
-            <div class="mt-12 flex items-center gap-4 text-sm text-zinc-500 font-mono">
-                <span>AGENCIA CREATIVA</span>
-                <span>•</span>
-                <span>NOV 2025</span>
+            
+            <!-- Créditos del Equipo -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-zinc-800 pt-8 max-w-3xl">
+                <div>
+                    <div class="text-amber-400 text-[10px] uppercase tracking-widest font-bold mb-1">Full Stack Dev</div>
+                    <div class="text-white font-medium">Albieri Alaña</div>
+                </div>
+                <div>
+                    <div class="text-amber-400 text-[10px] uppercase tracking-widest font-bold mb-1">Frontend Dev</div>
+                    <div class="text-white font-medium">Luis Quintero</div>
+                </div>
+                <div>
+                    <div class="text-amber-400 text-[10px] uppercase tracking-widest font-bold mb-1">Frontend Dev</div>
+                    <div class="text-white font-medium">Helimenes Garcia</div>
+                </div>
             </div>
         </div>
     </div>
@@ -57,25 +75,21 @@
                 </p>
             </div>
             <div class="col-span-8 grid grid-cols-2 gap-6">
-                <!-- Card 1 -->
                 <div class="glass-panel p-8 rounded-xl">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider mb-2">Perfil del Cliente Ideal</div>
                     <div class="text-2xl font-bold text-white mb-2">Grandes Corporaciones</div>
                     <p class="text-sm text-zinc-400">Empresas que buscan seguridad, calidad estandarizada y factura impecable.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="glass-panel p-8 rounded-xl border-l-4 border-l-amber-400">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider mb-2">El Diferencial</div>
                     <div class="text-2xl font-bold text-white mb-2">Personalización Total</div>
                     <p class="text-sm text-zinc-400">No es un servicio empaquetado. Es consultoría visual a medida.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="glass-panel p-8 rounded-xl">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider mb-2">Objetivo Web</div>
                     <div class="text-2xl font-bold text-white mb-2">Captación & Confianza</div>
                     <p class="text-sm text-zinc-400">La web debe funcionar como validador de autoridad para cerrar ventas B2B.</p>
                 </div>
-                <!-- Card 4 -->
                 <div class="glass-panel p-8 rounded-xl">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider mb-2">Estilo Visual</div>
                     <div class="text-2xl font-bold text-white mb-2">Elegante & Dramático</div>
@@ -90,7 +104,6 @@
         <div class="max-w-6xl mx-auto w-full">
             <h3 class="text-amber-400 tracking-widest uppercase text-sm font-bold mb-8">02. Estructura Web (Sitemap)</h3>
             
-            <!-- Visual Sitemap Tree -->
             <div class="flex flex-col items-center">
                 <div class="px-8 py-4 bg-white text-black font-bold rounded-lg shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-8 relative z-10">
                     HOME (Landing Page)
@@ -127,76 +140,96 @@
                     </div>
                 </div>
             </div>
-
-            <div class="mt-16 grid grid-cols-2 gap-8 border-t border-zinc-800 pt-8">
-                <div>
-                    <h4 class="font-bold text-white mb-2">UX Móvil (Mobile First)</h4>
-                    <p class="text-sm text-zinc-400">Diseño 100% adaptativo. Menú hamburguesa optimizado para pulgares y carga rápida en 4G.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-2">SEO Técnico</h4>
-                    <p class="text-sm text-zinc-400">Estructura semántica (H1, H2), textos alternativos en imágenes y velocidad de carga optimizada (Core Web Vitals).</p>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- SLIDE 4: LOOK & FEEL -->
+    <!-- SLIDE 4: TIPOGRAFÍA (NUEVA SECCIÓN) -->
     <div class="slide" id="slide-4">
-        <div class="grid grid-cols-2 gap-16 items-center h-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center h-full">
             <div>
-                <h3 class="text-amber-400 tracking-widest uppercase text-sm font-bold mb-4">03. Dirección de Arte</h3>
-                <h2 class="text-5xl font-bold mb-8">Cinematic Dark Luxury</h2>
+                <h3 class="text-amber-400 tracking-widest uppercase text-sm font-bold mb-4">03. Dirección de Arte - A</h3>
+                <h2 class="text-5xl font-bold mb-8">Tipografía & Impacto</h2>
                 <p class="text-zinc-400 mb-8 leading-relaxed">
-                    El briefing indica un estilo "elegante, oscuro y bien proporcionado". Hemos traducido esto en una interfaz que respira exclusividad.
+                    La selección tipográfica es crucial para comunicar profesionalismo. Hemos seleccionado una combinación que equilibra el carácter moderno con la legibilidad técnica.
                 </p>
-                
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-[#09090b] border border-zinc-700 rounded shadow-lg"></div>
-                        <div>
-                            <div class="font-bold text-white">Rich Black</div>
-                            <div class="text-xs text-zinc-500">Fondo inmersivo, reduce fatiga visual.</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-[#fbbf24] rounded shadow-lg shadow-amber-400/20"></div>
-                        <div>
-                            <div class="font-bold text-white">Cinema Gold</div>
-                            <div class="text-xs text-zinc-500">Acentos, llamadas a la acción (CTA).</div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            
-            <div class="relative">
-                <!-- Abstract UI Representation -->
-                <div class="absolute inset-0 bg-amber-500/20 blur-[100px] rounded-full"></div>
-                <div class="relative bg-zinc-900 border border-zinc-800 rounded-xl p-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div class="flex items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
-                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        <div class="ml-auto text-xs text-zinc-500">mockup_preview.tsx</div>
+            <div class="space-y-8">
+                <!-- Font 1 -->
+                <div class="glass-panel p-8 rounded-xl border-l-4 border-white">
+                    <div class="flex justify-between items-end mb-4">
+                        <h2 class="text-4xl font-black">Montserrat</h2>
+                        <span class="text-xs text-zinc-500 uppercase tracking-wider">Títulos / Headings</span>
                     </div>
-                    <!-- Mock Content -->
-                    <div class="space-y-4">
-                        <div class="h-32 bg-zinc-800 rounded-lg flex items-center justify-center">
-                            <span class="text-zinc-600 text-xs">VIDEO HEADER</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="h-20 w-1/2 bg-zinc-800 rounded-lg"></div>
-                            <div class="h-20 w-1/2 bg-zinc-800 rounded-lg"></div>
-                        </div>
-                        <div class="h-8 w-1/3 bg-amber-400 rounded-full mx-auto mt-4"></div>
+                    <p class="text-zinc-400 text-sm">
+                        <strong class="text-white">Impacto:</strong> Geométrica, sólida y contundente. En sus pesos altos (Bold/Black) transmite autoridad inmediata, ideal para captar la atención de clientes corporativos.
+                    </p>
+                </div>
+                <!-- Font 2 -->
+                <div class="glass-panel p-8 rounded-xl border-l-4 border-zinc-500">
+                    <div class="flex justify-between items-end mb-4">
+                        <h2 class="text-4xl font-light font-[Inter]">Inter</h2>
+                        <span class="text-xs text-zinc-500 uppercase tracking-wider">Cuerpo / Body</span>
                     </div>
+                    <p class="text-zinc-400 text-sm">
+                        <strong class="text-white">Impacto:</strong> Neutra y altamente legible. Diseñada específicamente para pantallas, asegura que la información técnica y los servicios se lean sin esfuerzo sobre fondos oscuros.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SLIDE 5: CIERRE -->
+    <!-- SLIDE 5: COLORIMETRÍA (NUEVA SECCIÓN) -->
     <div class="slide" id="slide-5">
+        <h3 class="text-amber-400 tracking-widest uppercase text-sm font-bold mb-8">03. Dirección de Arte - B</h3>
+        <h2 class="text-5xl font-bold mb-12">Código Cromático</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Color 1 -->
+            <div class="glass-panel p-2 rounded-2xl group hover:scale-105 transition-transform">
+                <div class="h-32 bg-[#09090b] rounded-xl mb-4 border border-zinc-800 relative"></div>
+                <div class="px-4 pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-white font-bold">Rich Black</span>
+                        <span class="code-font text-zinc-500 text-sm">#09090B</span>
+                    </div>
+                    <p class="text-xs text-zinc-400">
+                        <strong class="text-white block mb-1">Razón:</strong> Evoca la exclusividad del cine y la tecnología premium. Reduce la fatiga visual y hace que las fotos resalten.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Color 2 -->
+            <div class="glass-panel p-2 rounded-2xl group hover:scale-105 transition-transform transform md:-translate-y-4">
+                <div class="h-32 bg-[#fbbf24] rounded-xl mb-4 shadow-[0_0_20px_rgba(251,191,36,0.3)] relative"></div>
+                <div class="px-4 pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-white font-bold">Cinema Gold</span>
+                        <span class="code-font text-amber-400 text-sm">#FBBF24</span>
+                    </div>
+                    <p class="text-xs text-zinc-400">
+                        <strong class="text-white block mb-1">Razón:</strong> Color de acento que denota éxito, lujo y llamada a la acción (CTA). Guía el ojo hacia la conversión.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Color 3 -->
+            <div class="glass-panel p-2 rounded-2xl group hover:scale-105 transition-transform">
+                <div class="h-32 bg-[#e4e4e7] rounded-xl mb-4 border border-zinc-700 relative"></div>
+                <div class="px-4 pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-white font-bold">Platinum</span>
+                        <span class="code-font text-zinc-500 text-sm">#E4E4E7</span>
+                    </div>
+                    <p class="text-xs text-zinc-400">
+                        <strong class="text-white block mb-1">Razón:</strong> Usado para textos. Evitamos el blanco puro (#FFF) para mantener la elegancia y suavidad visual sobre el fondo oscuro.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: CIERRE -->
+    <div class="slide" id="slide-6">
         <div class="text-center max-w-4xl mx-auto">
             <h2 class="text-6xl font-bold mb-8">El Siguiente Paso</h2>
             <p class="text-xl text-zinc-400 mb-12">
@@ -205,7 +238,7 @@
             
             <div class="grid grid-cols-3 gap-8 text-left border-t border-zinc-800 pt-12">
                 <div>
-                    <div class="text-amber-400 font-bold mb-2">TIEMPO DE DESARROLLO</div>
+                    <div class="text-amber-400 font-bold mb-2">TIEMPO</div>
                     <div class="text-white text-2xl font-light">3 Semanas</div>
                 </div>
                 <div>
@@ -221,16 +254,16 @@
     </div>
 
     <!-- CONTROLS -->
-    <div class="progress-bar" id="progressBar" style="width: 20%"></div>
+    <div class="progress-bar" id="progressBar" style="width: 16%"></div>
     <div class="controls">
         <button class="btn-nav" onclick="changeSlide(-1)">←</button>
-        <span id="slideCounter" class="flex items-center text-zinc-500 font-mono">01 / 05</span>
+        <span id="slideCounter" class="flex items-center text-zinc-500 font-mono">01 / 06</span>
         <button class="btn-nav" onclick="changeSlide(1)">→</button>
     </div>
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 5;
+        const totalSlides = 6;
 
         function changeSlide(dir) {
             const next = currentSlide + dir;
@@ -252,3 +285,4 @@
     </script>
 </body>
 </html>
+```
